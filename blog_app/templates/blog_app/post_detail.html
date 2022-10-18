@@ -1,0 +1,45 @@
+{% extends 'blog_app/base.html' %} 
+{% load static %} 
+{% block title %}{{block.super}} | Post{%endblock title %}
+{% block main %}
+
+<div class="container">
+    <div class="post_detail_main">
+        <div class="post_detail">
+            <img src="{{po_dtl.img.url}}" alt="">
+            <div class="post_detail_content">
+                <h1>{{po_dtl.title}}</h1>
+                <p class="date">{{po_dtl.date}}</p>
+                <p class="desc">{{po_dtl.content|safe}}</p>
+            </div>
+
+            <!--comment form-->
+            <div class="comment-container">
+                <div class="commnet-form">
+                    <h1>Add a new comment! </h1>
+                    <form action="" method='POST' class="comment-form" novalidate>
+                        {% csrf_token %}
+                        <p class="comment-input" > {{comment_form}} </p>
+                        <button type="submit" > Post Comment </button>
+                    </form>
+                </div>
+
+                <div class="comments">
+                    <h1> Comments... </h1>
+                    {% if comments %}
+                    {% for comment in comments %}
+                    <div class="comment">
+                        <strong>{{comment.user}}</strong> <small>{{comment.date}}</small>
+                        <p>{{comment.message}}</p>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p class="no-comment no">No Comments!</p>
+                    <p class="no-comment">Add One</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}

@@ -1,0 +1,54 @@
+{% load static %}
+<nav class="navbar bgBlack">
+    <div class="container navinner">
+        
+        <div class="logo">
+            <a href="{% url 'home' %}">REAL BLOG</a>
+        </div>
+
+        <ul class="navitems navitems3" id="navitems">
+            <li><a href="{% url 'home' %}">home</a></li>
+            <li><a href="{% url 'about' %}">about</a></li>
+            <li><a href="{% url 'contact' %}">contact</a></li>
+            <li><a href="{% url 'subcategory' 'Best Product' %}">View product</a></li>
+            <div class="logsign">
+                {% if not request.user.is_authenticated %}
+                <a id="regi" class="regi" href="{% url 'login' %}">Login</a>
+                <a class="regi" href="{% url 'signup' %}">Sign Up</a>
+                {% else %}
+                <a id="regi" class="regi" href="{% url 'user_profile' %}">Profile</a>
+                <a id="regi" class="regi" href="{% url 'logout' %}">Logout</a>
+                {% endif %}
+            </div>
+        </ul>
+
+        <!--seatch-->
+        <form action="{% url 'search' %}" class="search search3" id="search" method="GET">
+            <input type="text" name='search' placeholder="Search">
+            <button type="submit"><img src="{% static 'blog_app/img/search.png' %}" alt="search" height="50px"></button>
+        </form>
+        
+        <div class="register">
+            {% if user.is_authenticated %}
+            <a href="{% url 'user_profile' %}">{{request.user|capfirst}}</a><span class="downarrow">&#129171;</span>
+            {% else %}
+                <a id="regi" class="regi" href="{% url 'login' %}">Login</a>
+                <span>/</span>
+                <a class="regi" href="{% url 'signup' %}"> Signup</a>
+            {% endif %}
+        </div>
+        <div class="ham-right">
+            <div class="ham-category" id="ham-category">
+                <p>Category</p>
+            </div>
+            <div class="hamburger" id="ham" >
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="ham-search-box">
+                <img class="ham-search" id="ham-search" src="{% static 'blog_app/img/white-search.png' %}" alt="search" height="50px">
+            </div>
+        </div>
+    </div>
+</nav>

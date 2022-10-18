@@ -1,0 +1,33 @@
+{% extends 'blog_app/base.html' %}
+{% load static %}
+{% block title %}{{block.super}} | Home{% endblock title %}
+{% block main %}
+<section class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <p style="font-size:1.8rem; margin-top:1rem;">{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    <div class="homeContainer">
+        <!-- main -->
+        <div class="home_main">
+            {% for post in all_post %}
+                <div class="home">
+                    <a href="{% url 'postdetail' post.id %}">
+                        <div class="homediv2">
+                            <div class="home-img">
+                                <img src="{{post.img.url}}" alt="Image">
+                            </div>
+                            <div class="home-inner">
+                                <h1>{{post.title}}</h1>
+                                <p class="date">{{post.date}}</p>
+                                <p>{{post.content|safe|truncatewords:15}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock main %}

@@ -1,0 +1,39 @@
+{% extends 'blog_app/base.html' %}
+{% load static %}
+{% block title %}{{block.super}} | Profile{% endblock title %}
+{% block main %}
+<div class="profile">
+    {% if messages %}
+        {% for message in messages %}
+            <p style="font-size:1.8rem; margin-top:1rem;">{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    <div class="profilemain">
+        <div class="profilemanue">
+            <ul>
+                <li><a href="{% url 'user_profile' %}">Profile</a></li>
+                <li><a href="{% url 'passwordchange' %}">Change Password</a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+            </ul>
+        </div>
+        <div class="profilemain-right">
+            <form action="" method="POST" enctype="multipart/form-data" novalidate >
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="error"> {{error}}</p>
+                    {% endfor %}
+                {% endif %}
+                {% for field in u_form %}
+                    <div>
+                        {{field.label_tag}}<br>
+                        {{field}}
+                        <span>{{field.errors|striptags}}</span>
+                    </div>
+                {% endfor %}
+                <button>Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main %}

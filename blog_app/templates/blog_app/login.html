@@ -1,0 +1,34 @@
+{% extends 'blog_app/base.html' %}
+{% block title %}{{block.super}} | Login{{auth}}{% endblock title %}
+{% block main %}
+<div class="container">
+    <form action="" method="POST" class="auth" novalidate>
+        {% csrf_token %}
+        <p>Login</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p class="error"> {{error}}</p>
+        {% endfor %}
+        {% endif %}
+
+        {% for field in form %}
+        <div>
+            {{field.label_tag}}<br>
+            {{field}}
+            <span>{{field.errors|striptags}}</span>
+        </div>
+        {% endfor %}
+        
+        <a href="{% url 'password_reset' %}">Forgot Password?</a> <br>
+        <small class="newacc">New to Real Blog?</small><a class="newacc" href="{% url 'signup' %}">Creat An Account</a>
+        <button>Login</button>
+    </form>
+</div>
+{% endblock main %}

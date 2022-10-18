@@ -1,0 +1,32 @@
+{% extends 'blog_app/base.html' %}
+{% block title %}{{block.super}} | {{auth}}{% endblock title %}
+{% block main %}
+<div class="container">
+    <form action="" method="POST" class="auth" novalidate>
+        {% csrf_token %}
+        <p>{{auth}}</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="error"> {{error}}</p>
+            {% endfor %}
+        {% endif %}
+        
+        {% for field in form %}
+        <div>
+            {{field.label_tag}}<br>
+            {{field}}
+            <span>{{field.errors|striptags}}</span>
+        </div>
+        {% endfor %}
+        <small>Existing User?</small> <a href="{% url 'login' %}">Login Now</a>
+        <button>{{auth}}</button>
+    </form>
+</div>
+{% endblock main %}

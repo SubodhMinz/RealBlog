@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Real Blog{% endblock title %}</title>
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'blog_app/css/style.css' %}">
+    <!--fav icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'ablog_pp/img/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'blog_app/img/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'blog_app/img/favicons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'blog_app/img/favicons/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'blog_app/img/favicons/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+    {% include 'blog_app/nav.html' %}
+    {% include 'blog_app/subnav.html' %}
+    {% block main %}{% endblock main %}
+    {% include 'blog_app/footer.html' %}
+    <!-- custom js -->
+    <script src="{% static 'blog_app/js/script.js' %}"></script>
+    <script src="{% static 'blog_app/js/tiny.js' %}"></script>
+</body>
+</html>

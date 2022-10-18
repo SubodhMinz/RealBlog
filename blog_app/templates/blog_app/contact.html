@@ -1,0 +1,25 @@
+{% extends 'blog_app/base.html' %}
+{% block title %}{{block.super}} | Contact{% endblock title %}
+{% block main %}
+<div class="contactform">
+    <form action="" class="contact" method="POST">
+        {% csrf_token %}
+        <p>Contact Us</p>
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+
+        {{form.non_field_errors}}
+        {% for field in form %}
+        <div>
+            {{field.label_tag}}
+            {{field}}
+            <span>{{field.errors|striptags}}</span>
+        </div>
+        {% endfor %}
+        <button>Submit</button>
+    </form>
+</div>
+{% endblock main %}

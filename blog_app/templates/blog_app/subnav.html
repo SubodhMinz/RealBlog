@@ -1,0 +1,8 @@
+<nav class="subnavbar subnavbar3" id="subnavbar">
+    <div class="container subnavbar-inner">
+        <a href="{% url 'subcategory' 'All' %}">All</a>
+        {% for cat in ctgry %}
+        <a href="{% url 'subcategory' cat.title %}">{{cat.title|capfirst}}</a>
+        {% endfor %}
+    </div>
+</nav>  
